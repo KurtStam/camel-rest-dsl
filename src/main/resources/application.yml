@@ -1,7 +1,7 @@
 camel:
   springboot:
     # The Camel context name
-    name: {{title}}
+    name: rest-dsl
   component:
     servlet:
       mapping:
