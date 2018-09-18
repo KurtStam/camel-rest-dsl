@@ -1,0 +1,8 @@
+kind: Service
+name: 
+metadata:
+  annotations:
+  labels:
+    expose: "false"
+spec:
+  type: LoadBalancer
