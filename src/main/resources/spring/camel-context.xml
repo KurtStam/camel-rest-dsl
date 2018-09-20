@@ -14,13 +14,13 @@
                 <constant>500</constant>
             </setHeader>
             <setBody>
-                <simple>${exception.message}</simple>
+                <simple>My Error Message</simple>
             </setBody>
         </onException>
 
         <restConfiguration component="servlet"/>
 
-        <rest path="/" enableCORS="true">
+        <rest path="/openapi.json" enableCORS="true">
             <get id="openapi.json" produces="application/json" uri="openapi.json">
                 <description>Gets the openapi document for this service</description>
                 <route>
@@ -31,23 +31,20 @@
             </get>
         </rest>
 
-        <rest path="{{swagger.basePath}}" bindingMode="json" enableCORS="true">
-{{& restXML}}
-
-        {{#directEndpoints}}
+        <rest path="/openapi.json" bindingMode="json" enableCORS="true">
+        </rest>
         <route>
             <from uri="{{.}}"/>
             <to uri="direct:501"/>
         </route>
-        {{/directEndpoints}}
 
         <route>
             <from uri="direct:501"/>
-            <log message="API operation not yet implemented: ${headers.CamelHttpMethod} ${headers.CamelHttpPath}"/>
+            <log message="API operation not yet implemented: GET /"/>
             <setHeader headerName="Exchange.HTTP_RESPONSE_CODE">
                 <constant>501</constant>
             </setHeader>
-            <setBody><simple>API operation not implemented: ${headers.CamelHttpMethod} ${headers.CamelHttpPath}</simple></setBody>
+            <setBody><simple>API operation not implemented: GET /</simple></setBody>
         </route>
 
     </camelContext>
